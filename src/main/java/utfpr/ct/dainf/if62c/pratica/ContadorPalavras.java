@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  */
 public class ContadorPalavras {
     
-    private BufferedReader leitor;
+    private BufferedReader reader;
 
     public ContadorPalavras(String caminho) {
         if (caminho == null){
@@ -24,7 +24,7 @@ public class ContadorPalavras {
             System.exit(1);
         }
         try{
-            leitor = new BufferedReader(new InputStreamReader(new FileInputStream(caminho)));
+            reader = new BufferedReader(new InputStreamReader(new FileInputStream(caminho)));
         }catch(FileNotFoundException e){
             System.out.println("Arquivo inválido \n Cod. Erro:"+ e);
             System.exit(0);
@@ -33,7 +33,7 @@ public class ContadorPalavras {
     
     public Map<String, Integer> getPalavras() throws IOException{
         Map<String, Integer> mapa = new HashMap<>();
-        String line = this.leitor.readLine();
+        String line = this.reader.readLine();
         while (line != null){
             Pattern pattern = Pattern.compile("\\w+");
             Matcher matcher = pattern.matcher(line);
@@ -47,9 +47,9 @@ public class ContadorPalavras {
                     mapa.put(t, 1);
                 }
             }
-            line = this.leitor.readLine();
+            line = this.reader.readLine();
         }
-        leitor.close();
+        reader.close();
         return mapa;
     }     
 }
